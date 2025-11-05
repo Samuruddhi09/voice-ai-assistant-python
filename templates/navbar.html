@@ -1,0 +1,83 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top border-bottom border-pink">
+  <div class="container-fluid">
+
+    <!-- Brand -->
+    <a class="navbar-brand d-flex align-items-center text-pink fw-bold" href="{{ url_for('home') }}">
+      <img src="{{ url_for('static', filename='images/logo.jpg') }}" width="40" height="40" class="rounded-circle me-2" alt="Bunny Logo" />
+      Dear Bunny
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarBunny">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarBunny">
+      <ul class="navbar-nav ms-auto gap-2">
+
+        <!-- Chat -->
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{{ url_for('home') }}">
+            <i class="bi bi-chat-dots"></i> Chat
+          </a>
+        </li>
+
+        <!-- Notes -->
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{{ url_for('notes') }}">
+            <i class="bi bi-journal-text"></i> Notes
+          </a>
+        </li>
+
+        <!-- Markets / Charts -->
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{{ url_for('charts') }}">
+            <i class="bi bi-graph-up"></i> Markets
+          </a>
+        </li>
+
+        <!-- To-Do -->
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{{ url_for('todo') }}">
+            <i class="bi bi-check2-square"></i> To-Do
+          </a>
+        </li>
+
+        <!-- Schedule -->
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{{ url_for('schedule') }}">
+            <i class="bi bi-calendar-week"></i> Schedule
+          </a>
+        </li>
+
+        <!-- Reminders -->
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{{ url_for('reminders') }}">
+            <i class="bi bi-bell"></i> Reminders
+          </a>
+        </li>
+
+        <!-- History -->
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{{ url_for('chat_history') }}">
+            <i class="bi bi-clock-history"></i> History
+          </a>
+        </li>
+
+        <!-- Stock Advisor -->
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{{ url_for('stock_page') }}">
+            <i class="bi bi-currency-rupee"></i> Stock Advisor
+          </a>
+        </li>
+
+        <!-- Settings -->
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{{ url_for('settings') }}">
+            <i class="bi bi-gear"></i> Settings
+          </a>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>

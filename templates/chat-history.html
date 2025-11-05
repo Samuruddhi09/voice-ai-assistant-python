@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chat History | Dear Bunny</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Custom CSS & Favicon -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='images/logo.jpg') }}">
+</head>
+
+<body class="bg-dark text-white">
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top border-bottom border-pink">
+  <div class="container-fluid">
+    <a class="navbar-brand d-flex align-items-center text-pink fw-bold" href="{{ url_for('home') }}">
+      <img src="{{ url_for('static', filename='images/logo.jpg') }}" width="40" height="40" class="rounded-circle me-2" alt="Bunny Logo" />
+      Dear Bunny
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarBunny">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarBunny">
+        <ul class="navbar-nav ms-auto gap-2">
+          <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('home') }}"><i class="bi bi-chat-dots"></i> Chat</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('notes') }}"><i class="bi bi-journal-text"></i> Notes</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('charts') }}"><i class="bi bi-graph-up"></i> Charts</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('todo') }}"><i class="bi bi-check2-square"></i> To-Do</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('schedule') }}"><i class="bi bi-calendar-week"></i> Schedule</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('reminders') }}"><i class="bi bi-bell"></i> Reminders</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('chat_history') }}"><i class="bi bi-clock-history"></i> History</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('stock_page') }}"><i class="bi bi-currency-rupee"></i> Stock Advisor</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('settings') }}"><i class="bi bi-gear"></i> Settings</a></li>
+        </ul>
+      </div>
+  </div>
+</nav>
+
+<!-- Back + Download -->
+<div class="container mt-3 d-flex gap-2">
+  <a href="{{ url_for('home') }}" class="btn btn-outline-light">
+    <i class="bi bi-arrow-left"></i> Back
+  </a>
+  <button onclick="downloadChat()" class="btn btn-outline-light">
+    <i class="bi bi-download"></i> Download Chat
+  </button>
+</div>
+
+<!-- Chat History Section -->
+<div class="container my-5">
+  <h2 class="text-center text-pink mb-4">Chat History</h2>
+
+  <div id="chat-history-list" class="list-group shadow rounded bg-light text-dark"></div>
+
+  <div id="no-history" class="text-center text-muted py-4 d-none">
+    No chats yet. Your future chats will appear here 🐰✨
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Firebase & App -->
+<script type="module" src="{{ url_for('static', filename='firebase.js') }}"></script>
+<script type="module" src="{{ url_for('static', filename='script.js') }}"></script>
+
+<!-- Empty-state helper -->
+<script>
+// Load chat history list
+document.addEventListener("DOMContentLoaded", () => {
+  const stored = JSON.parse(localStorage.getItem("chatLog")) || {};
+  const list = document.getElementById("chat-history-list");
+
+  list.innerHTML = "";
+
+  Object.entries(stored).forEach(([id, msgs]) => {
+    const preview = msgs[0]?.message?.slice(0, 40) || "New Chat";
+    const item = document.createElement("a");
+    item.href = "/?session=" + id;
+    item.className = "list-group-item list-group-item-action";
+    item.textContent = preview;
+    list.appendChild(item);
+  });
+
+  if (Object.keys(stored).length === 0) {
+    document.getElementById("no-history")?.classList.remove("d-none");
+  }
+});
+
+// Download chat history file
+function downloadChat() {
+  const data = localStorage.getItem("chatLog") || "{}";
+  const blob = new Blob([data], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "bunny_chat_history.json";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+</script>
+
+
+</body>
+</html>
