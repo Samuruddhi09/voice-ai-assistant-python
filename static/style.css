@@ -1,0 +1,463 @@
+/* ================= GLOBAL STYLES ================= */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(180deg, #301934 0%, #1e0e2f 100%);
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+.text-pink {
+  color: #ff69b4;
+}
+
+.text-gradient {
+  background: linear-gradient(45deg, #ff69b4, #ffc0cb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ============= NAVBAR ======================== */
+.border-pink {
+  border-color:#ff69b4 !important;
+}
+
+/* ================= BUTTONS ================= */
+.btn-pink {
+  background-color: #ff69b4;
+  border: none;
+  color: #fff;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  width: 48px;
+  padding: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.btn-pink:hover {
+  background-color: #ff85c1;
+  box-shadow: 0 0 10px #ff69b4;
+}
+
+.btn-pink i {
+  font-size: 20px;
+}
+
+#MicBtn i,
+#CameraBtn i {
+  font-size: 20px;
+}
+
+#MicBtn.listening {
+  background-color: #6c2181;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(134, 53, 171, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(255,77,109, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,77,109, 0); }
+}
+
+
+/* ================= CHATBOX ================= */
+#chatbox {
+  border-radius: 30px;
+  padding: 10px 20px;
+  border: 2px solid #ff69b4;
+  background-color: #b38787;
+  color: #fff;
+  transition: 0.3s;
+  width: 100%;
+}
+
+#chatbox:focus {
+  outline: none;
+  border-color: #ff85c1;
+  box-shadow: 0 0 8px #ff69b4;
+}
+
+.chat-bubble {
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 20px;
+  max-width: 75%;
+  word-wrap: break-word;
+}
+
+.chat-bubble.user {
+  background-color: #ff69b4;
+  color: white;
+  margin-left: auto;
+  text-align: right;
+}
+
+.chat-bubble.bot {
+  background-color: #1e1e2e;
+  color: #fff;
+  margin-right: auto;
+  text-align: left;
+}
+
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #007bff;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 0.9s linear infinite;
+  margin: 10px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+/* ================= AVATAR & RINGS ================= */
+.bunny-ring-wrapper {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.bunny-ring-wrapper::before {
+  content: '';
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,105,180,0.15) 0%, transparent 70%);
+  z-index: 0;
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+.bunny-avatar {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  border-radius: 50%;
+  z-index: 3;
+  background-color: #301934;
+  padding: 10px;
+  box-shadow: 0 0 25px rgba(255, 105, 180, 0.4);
+}
+
+.pulse-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid #ff69b4;
+  box-shadow: 0 0 15px rgba(255, 105, 180, 0.4);
+  opacity: 0.6;
+  z-index: 1;
+  animation: spin 8s linear infinite;
+}
+
+.ring1 {
+  width: 220px;
+  height: 220px;
+  animation-delay: 0s;
+}
+
+.ring2 {
+  width: 250px;
+  height: 250px;
+  border-style: dashed;
+  animation-delay: 2s;
+}
+
+.ring3 {
+  width: 280px;
+  height: 280px;
+  border-style: dotted;
+  animation-delay: 4s;
+  opacity: 0.3;
+}
+
+.ring4 {
+  width: 310px;
+  height: 310px;
+  border-style: solid;
+  animation-delay: 6s;
+  opacity: 0.2;
+  box-shadow: 0 0 30px rgba(255, 105, 180, 0.2);
+}
+
+/* ================= ANIMATIONS ================= */
+@keyframes float {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes spin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { transform: scale(1); opacity: 0.3; }
+  50% { transform: scale(1.1); opacity: 0.6; }
+}
+
+@keyframes pulse-scale {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.bunny-avatar.pulsing {
+  animation: pulse-scale 1s infinite ease-in-out;
+}
+
+
+/* ================= CHAT HISTORY PAGE ================= */
+.chat-history-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.chat-session {
+  background-color: #1e1e1e;
+  border: 2px solid #ff69b4;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.chat-session:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 15px rgba(255, 105, 180, 0.4);
+}
+
+.chat-session h5 {
+  color: #ff85c1;
+  margin-bottom: 8px;
+}
+
+.chat-session small {
+  color: #bbb;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 576px) {
+  .bunny-avatar {
+    width: 120px;
+    height: 120px;
+  }
+
+  .bunny-ring-wrapper {
+    width: 220px;
+    height: 220px;
+  }
+
+  #chatbox {
+    font-size: 14px;
+  }
+
+  #MicBtn {
+    font-size: 14px;
+    padding: 8px 14px;
+  }
+}
+
+/* ==== Full Screen TradingView Chart ==== */
+
+#chart-container {
+  height: 88vh !important;
+  width: 97% !important;
+  margin: 0 auto;
+  border: 2px solid #ff69b4;
+  border-radius: 14px;
+  background: #0a0012;
+  box-shadow: 0 0 25px rgba(255,105,180,0.35);
+  overflow: hidden;
+}
+
+/* Force iframe to fill */
+.tradingview-widget-container,
+.tradingview-widget-container iframe,
+#chart-container iframe,
+#chart-container > div {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+/* Optional: Wider content container on big screens */
+@media (min-width: 1200px) {
+  .container {
+    max-width: 96vw !important;
+  }
+}
+
+/* Bigger Search button on Markets Page */
+.btn-pink {
+  background-color: #ff4fa3 !important;
+  color: white !important;
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 10px 20px !important;     /* bigger height + width */
+  font-size: 16px !important;
+  border: none;
+  transition: 0.2s ease;
+}
+
+/* Hover Glow */
+.btn-pink:hover {
+  background-color: #ff77c7 !important;
+  box-shadow: 0 0 12px rgba(255,105,180,0.6);
+  transform: translateY(-1px);
+}
+
+/* Make input + button look aligned */
+#symbolInput {
+  border: 2px solid #ff4fa3;
+  border-radius: 8px;
+  height: 44px;
+  font-size: 16px;
+}
+
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+/* ================= STOCK ADVISOR PAGE ================= */
+
+.stock-container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 25px;
+  border-radius: 16px;
+  background: rgba(255,105,180,0.10);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 25px rgba(255,105,180,0.35);
+  border: 1px solid rgba(255,105,180,0.25);
+}
+
+.stock-container h2 {
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #ff69b4;
+  text-shadow: 0 0 10px rgba(255,105,180,0.5);
+}
+
+.stock-form label {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #ffbbe8;
+}
+
+.stock-form select,
+.stock-form input {
+  width: 100%;
+  padding: 10px;
+  background: #1b0e27;
+  border: 2px solid #ff69b4;
+  border-radius: 10px;
+  color: white;
+  font-size: 15px;
+  outline: none;
+  margin-bottom: 15px;
+}
+
+.stock-form select:focus,
+.stock-form input:focus {
+  border-color: #ff9bd9;
+  box-shadow: 0 0 8px rgba(255,105,180,.6);
+}
+
+.stock-btn {
+  width: 100%;
+  padding: 12px;
+  background: #ff69b4;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  transition: 0.25s;
+  cursor: pointer;
+}
+
+.stock-btn:hover {
+  background: #ff85c1;
+  box-shadow: 0 0 15px rgba(255,105,180,0.8);
+}
+
+/* Stock Results Table */
+.stock-table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+  text-align: center;
+  color: #fff;
+  background: rgba(255,105,180,0.05);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(255,105,180,0.35);
+}
+
+.stock-table th {
+  padding: 12px;
+  background: rgba(255,105,180,0.3);
+  color: white;
+  font-size: 15px;
+}
+
+.stock-table td {
+  padding: 10px;
+  border-bottom: 1px solid rgba(255,105,180,0.4);
+}
+
+.stock-table tr:hover {
+  background: rgba(255,105,180,0.15);
+  transition: 0.2s;
+}
+
+/* 🎤 Voice Control Buttons (Pause / Replay) */
+.voice-round-btn {
+  background-color: #ff69b4;
+  border: none;
+  color: #fff;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  width: 48px;
+  padding: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.voice-round-btn:hover {
+  background-color: #ff85c1;
+  box-shadow: 0 0 10px #ff69b4;
+}
+
+.voice-round-btn i {
+  font-size: 20px;
+}
+
+/* Active state when paused */
+.voice-round-btn.active {
+  background-color: #6c2181;
+  box-shadow: 0 0 10px #b14ecb;
+}
